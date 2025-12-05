@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoyo Arena - Official Website</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="portal.css">
+    
+    <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
+</head>
+<body>
+
+    <div class="launcher-background"></div>
+
+    <div class="launcher-layout">
+        
+        <aside class="sidebar">
+            <div class="logo-area">
+                <h1>HOYO<br>ARENA</h1>
+                <div class="element-icons">
+                    <i class="fa-solid fa-fire"></i>
+                    <i class="fa-solid fa-droplet"></i>
+                    <i class="fa-solid fa-wind"></i>
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+            </div>
+
+            <nav class="main-menu">
+                <button class="menu-btn active"><i class="fa-solid fa-newspaper"></i> News</button>
+                
+                <a href="game.html" target="_blank" class="play-btn-container">
+                    <div class="play-btn">
+                        <div class="play-btn-border-layer">
+                            <div class="play-btn-inner">
+                                <span>Play Now!</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="menu-accordion-container" id="login-accordion">
+                    <button class="menu-btn trigger-btn" id="login-trigger-btn">
+                        <i class="fa-solid fa-lock" id="login-icon"></i> 
+                        <span id="login-text">Login / Register</span>
+                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </button>
+
+                    <div class="accordion-content closed" id="login-dropdown">
+                        <div class="accordion-inner-padding">
+                            <div id="logged-out-content">
+                                <div class="portal-form-container">
+                                    <h4>Login to Arena</h4>
+                                    <form id="portal-login-form">
+                                        <input type="text" id="pl-username" placeholder="Username" required>
+                                        <input type="password" id="pl-password" placeholder="Password" required>
+                                        <button type="submit" class="portal-submit-btn">Login</button>
+                                    </form>
+                                    <div class="form-divider"><span>OR</span></div>
+                                    <h4>Create Account</h4>
+                                    <form id="portal-register-form">
+                                        <input type="text" id="pr-username" placeholder="New Username" required>
+                                        <input type="password" id="pr-password" placeholder="New Password" required>
+                                        <button type="submit" class="portal-submit-btn register">Register</button>
+                                    </form>
+                                    <p id="portal-auth-message"></p>
+                                </div>
+                            </div>
+                            <div id="logged-in-content" class="hidden">
+                                <h4 id="welcome-user-text">Welcome, Player!</h4>
+                                <div class="submenu-grid">
+                                    <button class="menu-btn submenu-btn"><i class="fa-solid fa-user-ninja"></i> Profile</button>
+                                    <button class="menu-btn submenu-btn"><i class="fa-solid fa-user-group"></i> Friends</button>
+                                    <button class="menu-btn submenu-btn"><i class="fa-solid fa-shield-halved"></i> Guilds</button>
+                                </div>
+                                <button id="portal-logout-btn" class="logout-btn-small">
+                                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="menu-btn"><i class="fa-solid fa-trophy"></i> Ranking List</button>
+                <button class="menu-btn"><i class="fa-brands fa-discord"></i> Discord</button>
+                <button class="menu-btn"><i class="fa-solid fa-users"></i> Characters</button>
+                <button class="menu-btn"><i class="fa-solid fa-circle-question"></i> How to Play</button>
+            </nav>
+        </aside>
+
+        <main class="content-area">
+            <div class="top-banner">
+                <img src="assets/bg/banner_temp.png" alt="Latest News Banner" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+            </div>
+
+            <div id="news-grid-view">
+                <div class="news-container">
+                    <div class="news-grid" id="news-grid">
+                        <p style="color: #aaa; padding: 20px;">Loading news...</p>
+                    </div>
+                    
+                    <div class="pagination-controls">
+                        <button id="prev-page-btn" class="page-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                        <span id="page-indicator">Page 1 / 1</span>
+                        <button id="next-page-btn" class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="single-article-view" class="hidden">
+                <div class="article-nav-bar">
+                    <button id="back-to-hub-btn" class="menu-btn back-btn">
+                        <i class="fa-solid fa-chevron-left"></i> Back to News
+                    </button>
+                </div>
+
+                <div class="article-full-panel">
+                    <div class="article-full-header">
+                        <h2 id="full-article-title"></h2>
+                        <span id="full-article-date"></span>
+                    </div>
+                    <div class="article-divider"></div>
+                    <div id="full-article-body" class="custom-scrollbar"></div>
+                    <div class="corner-bottom"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="portal.js" type="module"></script>
+</body>
+</html>

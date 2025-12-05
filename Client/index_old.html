@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoyo Arena - Unofficial PvP Multiplayer Game</title>
+    <link rel="stylesheet" href="portal.css">
+    <link rel="stylesheet" href="auth.css">
+    <link rel="stylesheet" href="lobby.css">
+    <link rel="stylesheet" href="game.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon/android-chrome-512x512.png">
+</head>
+<body>
+
+    <div class="launcher-background"></div>
+
+    <div class="launcher-layout">
+        
+        <aside class="sidebar">
+            <div class="logo-area">
+                <h1>HOYO<br>ARENA</h1>
+                <div class="element-icons">
+                    <i class="fa-solid fa-fire"></i>
+                    <i class="fa-solid fa-droplet"></i>
+                    <i class="fa-solid fa-wind"></i>
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+            </div>
+
+            <nav class="main-menu">
+                <button class="menu-btn active"><i class="fa-solid fa-newspaper"></i> News</button>
+                
+                <a href="game.html" target="_blank" class="play-btn-container">
+                    <div class="play-btn">
+                        <div class="play-btn-border-layer">
+                            <div class="play-btn-inner">
+                                <span>Play Now!</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="menu-accordion-container" id="login-accordion">
+                    <button class="menu-btn trigger-btn" id="login-trigger-btn">
+                        <i class="fa-solid fa-lock" id="login-icon"></i> 
+                        <span id="login-text">Login / Register</span>
+                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </button>
+
+                    <div class="accordion-content closed" id="login-dropdown">
+                        <div class="accordion-inner-padding">
+                            <div id="logged-out-content">
+                                <div class="portal-form-container">
+                                    <h4>Login to Arena</h4>
+                                    <form id="portal-login-form">
+                                        <input type="text" id="pl-username" placeholder="Username" required>
+                                        <input type="password" id="pl-password" placeholder="Password" required>
+                                        <button type="submit" class="portal-submit-btn">Login</button>
+                                    </form>
+                                    <div class="form-divider"><span>OR</span></div>
+                                    <h4>Create Account</h4>
+                                    <form id="portal-register-form">
+                                        <input type="text" id="pr-username" placeholder="New Username" required>
+                                        <input type="password" id="pr-password" placeholder="New Password" required>
+                                        <button type="submit" class="portal-submit-btn register">Register</button>
+                                    </form>
+                                    <p id="portal-auth-message"></p>
+                                </div>
+                            </div>
+                            <div id="logged-in-content" class="hidden">
+                                <h4 id="welcome-user-text">Welcome, Player!</h4>
+                                <div class="submenu-grid">
+                                    <button class="menu-btn submenu-btn"><i class="fa-solid fa-user-ninja"></i> Profile</button>
+                                    <button class="menu-btn submenu-btn"><i class="fa-solid fa-user-group"></i> Friends</button>
+                                    <button class="menu-btn submenu-btn"><i class="fa-solid fa-shield-halved"></i> Guilds</button>
+                                </div>
+                                <button id="portal-logout-btn" class="logout-btn-small">
+                                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="menu-btn"><i class="fa-solid fa-trophy"></i> Ranking List</button>
+                <button class="menu-btn"><i class="fa-brands fa-discord"></i> Discord</button>
+                <button class="menu-btn"><i class="fa-solid fa-users"></i> Characters</button>
+                <button class="menu-btn"><i class="fa-solid fa-circle-question"></i> How to Play</button>
+            </nav>
+        </aside>
+
+        <main class="content-area">
+            
+            <div class="top-banner">
+                <img src="assets/bg/banner_temp.png" alt="Latest News Banner" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+            </div>
+
+            <div id="news-grid-view">
+                <div class="news-container">
+                    <div class="news-grid" id="news-grid">
+                        <!-- Loading indicator or empty state -->
+                        <p style="color: #aaa; padding: 20px;">Loading news...</p>
+                    </div>
+                    
+                    <div class="pagination-controls">
+                        <button id="prev-page-btn" class="page-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                        <span id="page-indicator">Page 1 / 1</span>
+                        <button id="next-page-btn" class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="single-article-view" class="hidden">
+                <div class="article-nav-bar">
+                    <button id="back-to-hub-btn" class="menu-btn back-btn">
+                        <i class="fa-solid fa-chevron-left"></i> Back to News
+                    </button>
+                </div>
+
+                <div class="article-full-panel">
+                    <div class="article-full-header">
+                        <h2 id="full-article-title">Article Title Placeholder</h2>
+                        <span id="full-article-date">Date Placeholder</span>
+                    </div>
+                    <div class="article-divider"></div>
+                    
+                    <div id="full-article-body" class="custom-scrollbar">
+                        </div>
+                    
+                    <div class="corner-bottom"></div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+<script>
+        // ==============================
+        // --- NEWS DATA & STATE ---
+        // ==============================
+        let articles = [];
+        const API_URL = 'http://localhost:5000'; // Define globally here
+
+        // --- UPDATED: items per page ---
+        const itemsPerPage = 16;
+        let currentPage = 1;
+        let totalPages = 1;
+
+        // Elements
+        const grid = document.getElementById('news-grid');
+        const prevBtn = document.getElementById('prev-page-btn');
+        const nextBtn = document.getElementById('next-page-btn');
+        const pageIndicator = document.getElementById('page-indicator');
+        const newsGridView = document.getElementById('news-grid-view'); 
+        const singleArticleView = document.getElementById('single-article-view');
+        const backToHubBtn = document.getElementById('back-to-hub-btn');
+        const fullTitle = document.getElementById('full-article-title');
+        const fullDate = document.getElementById('full-article-date');
+        const fullBody = document.getElementById('full-article-body');
+
+        // ==============================
+        // --- API FETCHING ---
+        // ==============================
+        
+        async function fetchNews() {
+            try {
+                const res = await fetch(`${API_URL}/api/news/portal`);
+                if (!res.ok) throw new Error("Failed to fetch news");
+                
+                const data = await res.json();
+                // Transform mongo _id to id for compatibility if needed, or just use _id
+                articles = data.map(a => ({
+                    id: a._id,
+                    title: a.title,
+                    // Format date nicely
+                    date: new Date(a.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+                    preview: a.preview,
+                    content: a.content,
+                    category: a.category
+                }));
+                
+                totalPages = Math.ceil(articles.length / itemsPerPage) || 1;
+                renderPage(1); // Always reset to page 1 on new fetch
+                
+                // Check URL for deep linking AFTER we have data
+                checkUrlForArticle();
+                
+            } catch (err) {
+                console.error(err);
+                grid.innerHTML = '<p style="color: #ff6b6b;">Could not load news from server.</p>';
+            }
+        }
+
+        // ==============================
+        // --- VIEW LOGIC ---
+        // ==============================
+
+        // Function to render grid items
+        function renderPage(page) {
+            grid.innerHTML = '';
+            
+            if (articles.length === 0) {
+                grid.innerHTML = '<p style="color: #ccc;">No news articles found.</p>';
+                pageIndicator.textContent = `Page 1 / 1`;
+                prevBtn.disabled = true;
+                nextBtn.disabled = true;
+                return;
+            }
+
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageItems = articles.slice(start, end);
+
+            pageItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'news-item';
+                
+                // Add category badge if you like
+                const categoryBadge = `<span style="font-size:0.8em; background:#333; padding:2px 6px; border-radius:4px; color:#aaa; margin-left:10px;">${item.category}</span>`;
+                
+                div.innerHTML = `
+                    <div class="news-header">
+                        <h3>${item.title}</h3>
+                        <span class="date">${item.date}</span>
+                    </div>
+                    <p>${item.preview}</p>
+                    <div class="corner-bottom"></div>
+                `;
+                // Note: We pass 'true' to indicate this is a user click, not an initial load
+                div.onclick = () => openArticle(item, true);
+                grid.appendChild(div);
+            });
+
+            pageIndicator.textContent = `Page ${page} / ${totalPages}`;
+            prevBtn.disabled = page === 1;
+            nextBtn.disabled = page === totalPages;
+        }
+
+        // UPDATED Function to switch to Article View
+        function openArticle(item, pushToHistory = false) {
+            fullTitle.textContent = item.title;
+            fullDate.textContent = item.date;
+            fullBody.innerHTML = item.content;
+            fullBody.scrollTop = 0;
+
+            newsGridView.classList.add('hidden');
+            singleArticleView.classList.remove('hidden');
+
+            /* --- NEW: Update URL when opening article --- */
+            if (pushToHistory) {
+                const newUrl = `${window.location.pathname}?article_id=${item.id}`;
+                history.pushState({ articleId: item.id }, "", newUrl);
+            }
+            /* ------------------------------------------- */
+        }
+
+        // Function to switch back to Grid View
+        function closeArticle() {
+            singleArticleView.classList.add('hidden');
+            newsGridView.classList.remove('hidden');
+        }
+
+        // UPDATED Back Button Listener
+        backToHubBtn.onclick = () => {
+            closeArticle();
+            /* --- NEW: Clear URL when going back --- */
+            history.pushState({}, "", window.location.pathname);
+            /* -------------------------------------- */
+        };
+        
+        // Pagination Listeners
+        prevBtn.onclick = () => { if (currentPage > 1) { currentPage--; renderPage(currentPage); } };
+        nextBtn.onclick = () => { if (currentPage < totalPages) { currentPage++; renderPage(currentPage); } };
+        
+
+        // ==============================
+        // --- NEW: URL & HISTORY HANDLING ---
+        // ==============================
+
+        // 1. Handle Initial Page Load (Check for URL params)
+        function checkUrlForArticle() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = urlParams.get('article_id'); // String ID from Mongo
+            
+            if (articleId) {
+                // Find the article in our data array
+                const foundArticle = articles.find(a => a.id === articleId);
+                
+                if (foundArticle) {
+                    // Open it without adding a new history entry (we are already here)
+                    openArticle(foundArticle, false);
+                } else {
+                    // Optional: Clear URL if ID not found
+                    history.replaceState({}, "", window.location.pathname);
+                }
+            }
+        }
+
+        // 2. Handle Browser "Back/Forward" Buttons
+        window.addEventListener('popstate', (event) => {
+            // If the state has an articleId, open it. Otherwise, close article view.
+            if (event.state && event.state.articleId) {
+                const foundArticle = articles.find(a => a.id === event.state.articleId);
+                if (foundArticle) {
+                    openArticle(foundArticle, false);
+                }
+            } else {
+                closeArticle();
+            }
+        });
+
+        // ==============================
+        // --- INITIALIZATION ---
+        // ==============================
+        
+        // Fetch real data instead of using dummy loop
+        fetchNews();
+
+
+        // ==============================
+        // --- AUTH LOGIC (Unchanged) ---
+        // ==============================
+        let isLoggedIn = false;
+        let userToken = null;
+        let userName = null;
+        // const API_URL is already defined above
+
+        const accordionTrigger = document.getElementById('login-trigger-btn');
+        const accordionDropdown = document.getElementById('login-dropdown');
+        const loginTextEl = document.getElementById('login-text');
+        const loginIconEl = document.getElementById('login-icon');
+        const loggedOutContent = document.getElementById('logged-out-content');
+        const loggedInContent = document.getElementById('logged-in-content');
+        const welcomeText = document.getElementById('welcome-user-text');
+        const authMessage = document.getElementById('portal-auth-message');
+        const loginForm = document.getElementById('portal-login-form');
+        const registerForm = document.getElementById('portal-register-form');
+        const logoutBtn = document.getElementById('portal-logout-btn');
+
+        accordionTrigger.addEventListener('click', () => {
+            accordionDropdown.classList.toggle('closed');
+            accordionTrigger.classList.toggle('active');
+        });
+
+        function updateAuthUI() {
+            if (isLoggedIn) {
+                loggedOutContent.classList.add('hidden');
+                loggedInContent.classList.remove('hidden');
+                loginTextEl.textContent = 'My Account';
+                loginIconEl.className = 'fa-solid fa-user-check';
+                welcomeText.textContent = `Welcome, ${userName}!`;
+            } else {
+                loggedOutContent.classList.remove('hidden');
+                loggedInContent.classList.add('hidden');
+                loginTextEl.textContent = 'Login / Register';
+                loginIconEl.className = 'fa-solid fa-lock';
+                welcomeText.textContent = '';
+            }
+        }
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('pl-username').value;
+            const password = document.getElementById('pl-password').value;
+            if (!username || !password) { authMessage.textContent = "Please fill in both fields."; authMessage.className = "error"; return; }
+            authMessage.textContent = "Logging in..."; authMessage.className = "";
+            try {
+                const res = await fetch(`${API_URL}/api/users/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password }) });
+                let data; try { data = await res.json(); } catch (e) { throw new Error("Server sent an invalid response format."); }
+                if (res.ok) {
+                    if (data && data.user && data.user.username) { isLoggedIn = true; userToken = data.token; userName = data.user.username; authMessage.textContent = ""; loginForm.reset(); updateAuthUI(); } else { throw new Error("Login successful, but server response was incomplete."); }
+                } else { authMessage.textContent = data.msg || "Login failed. Please try again."; authMessage.className = "error"; }
+            } catch (err) { authMessage.textContent = err.message || "Server connection failed."; authMessage.className = "error"; }
+        });
+
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('pr-username').value;
+            const password = document.getElementById('pr-password').value;
+            if (!username || !password) { authMessage.textContent = "Please fill fields."; authMessage.className = "error"; return; }
+            authMessage.textContent = "Registering..."; authMessage.className = "";
+            try {
+                const res = await fetch(`${API_URL}/api/users/register`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password }) });
+                const data = await res.json();
+                if (res.ok) { isLoggedIn = true; userToken = data.token; userName = data.user.username; authMessage.textContent = "Registration successful!"; authMessage.className = "success"; registerForm.reset(); setTimeout(() => { authMessage.textContent = ""; updateAuthUI(); }, 1000); } else { authMessage.textContent = data.msg || "Registration failed."; authMessage.className = "error"; }
+            } catch (err) { authMessage.textContent = "Server connection failed."; authMessage.className = "error"; }
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            isLoggedIn = false; userToken = null; userName = null; updateAuthUI(); accordionDropdown.classList.add('closed'); accordionTrigger.classList.remove('active');
+        });
+
+        updateAuthUI();
+    </script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+/* --- GAME BOARD LAYOUT --- */
+#game-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#game-board {
+    width: 100%;
+    max-width: 1000px;
+}
+
+h1 {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #ffa500;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+#game-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+}
+
+.team-container {
+    flex: 1;
+    background: #2b2b2b;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+#team1-container { border-top: 3px solid #ff8c00; }
+#team2-container { border-top: 3px solid #6a5acd; }
+
+.team-container h2 {
+    text-align: center; margin-top: 0; font-size: 1.5em; padding-bottom: 10px; border-bottom: 1px solid #555;
+}
+#t1-team-name { color: #ff8c00; }
+#t2-team-name { color: #8975ff; }
+
+/* Chakra Bank */
+.chakra-bank {
+    display: flex; justify-content: center; gap: 5px; margin-bottom: 15px; padding: 10px; background: #111; border-radius: 5px;
+}
+.chakra-orb {
+    font-size: 1em; font-weight: bold; padding: 5px; border-radius: 20px; min-width: 40px; text-align: center;
+}
+.chakra-orb.green { background: #28a745; border: 1px solid #8fbc8f; color: #fff; }
+.chakra-orb.blue { background: #305bc9; border: 1px solid #4d8aff; color: #fff; }
+.chakra-orb.red { background: #c93030; border: 1px solid #ff4d4d; color: #fff; }
+.chakra-orb.white { background: #b0b0b0; border: 1px solid #ffffff; color: #222; }
+.chakra-orb.any { background: linear-gradient(45deg, #ff4d4d, #ff8c00, #f0e68c, #8fbc8f, #4d8aff, #6a5acd); border: 1px solid #fff; color: #111; }
+
+/* Roster */
+.team-roster { display: flex; flex-direction: column; gap: 10px; }
+.char-card {
+    background: #3c3c3c; padding: 10px; border-radius: 5px; border: 2px solid #3c3c3c; transition: all 0.2s; position: relative;
+}
+.active-team .char-card { border-color: #f0e68c; }
+.char-card.dead { opacity: 0.4; background: #222; }
+
+/* Targeting Animations */
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); border-color: #4ade80; }
+    70% { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); border-color: #4ade80; }
+    100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); border-color: #4ade80; }
+}
+.char-card.targetable { cursor: pointer; animation: pulse-green 1.5s infinite; background-color: #556b2f; border-color: #90ee90; }
+.char-card.targetable:hover { animation: none; background-color: #6b8e23; border-color: #22c55e; box-shadow: 0 0 15px #22c55e; transform: scale(1.02); z-index: 10; }
+
+.char-card h4 { margin: 0 0 8px 0; font-size: 1.2em; text-align: center; }
+.stat-bar { width: 100%; height: 20px; background-color: #111; border-radius: 5px; position: relative; overflow: hidden; margin-bottom: 8px; }
+.stat-bar-inner { height: 100%; transition: width 0.3s ease-in-out; border-radius: 5px; background-color: #28a745; }
+.stat-bar-label { position: absolute; width: 100%; text-align: center; font-weight: bold; color: #fff; text-shadow: 1px 1px 2px #000; line-height: 20px; font-size: 0.9em; }
+
+/* Effect Icons */
+.buff-container { display: flex; gap: 4px; justify-content: center; min-height: 24px; flex-wrap: wrap; }
+.effect-icon {
+    width: 24px; height: 24px; background: #555; color: #fff; border-radius: 4px; font-weight: bold; border: 1px solid #888; position: relative; cursor: help;
+}
+.effect-icon::before { content: '★'; display: block; text-align: center; line-height: 24px; font-size: 1.2em; }
+.effect-icon.buff { background: #28a745; border-color: #8fbc8f; }
+.effect-icon.debuff { background: #c93030; border-color: #ff4d4d; }
+.effect-icon.neutral { background: #6495ed; border-color: #add8e6; }
+.effect-stack-count { position: absolute; top: -5px; right: -5px; background: #fff; color: #111; font-size: 0.8em; font-weight: bold; padding: 0 4px; border-radius: 5px; border: 1px solid #000; }
+.effect-duration { position: absolute; bottom: 0; left: 0; width: 100%; text-align: center; font-size: 0.9em; background: rgba(0,0,0,0.6); line-height: 1; }
+
+/* Effect Tooltips */
+.effect-tooltip {
+    display: none; position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%);
+    background: #111; border: 1px solid #f0e68c; border-radius: 5px; padding: 10px; width: 280px; z-index: 100; pointer-events: none; text-align: left; box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+}
+.effect-icon:hover .effect-tooltip { display: block; }
+.tooltip-entry p { margin: 0; font-size: 0.9em; color: #ccc; }
+
+/* Active Team Area */
+#active-team-area { background: #222; border: 1px solid #444; border-radius: 8px; padding: 15px; margin-top: 20px; }
+#active-team-skills { display: flex; justify-content: space-around; gap: 15px; }
+.char-skill-set { flex: 1; background: #333; padding: 10px; border-radius: 5px; }
+#active-skills-container { display: grid; grid-template-columns: 1fr; gap: 8px; }
+
+.skill-button {
+    background-color: #4a4a4a; border: 2px solid #666; color: #fff; padding: 8px; border-radius: 5px; cursor: pointer; font-size: 0.9em; width: 100%;
+}
+.skill-button:hover:not(:disabled) { background-color: #5a5a5a; }
+.skill-button:disabled { background-color: #333; color: #777; cursor: not-allowed; border-color: #444; }
+.skill-button.queued { background-color: #b8860b; border-color: #f0e68c; color: #111; }
+.skill-button.pending { background-color: #6495ed; border-color: #fff; color: #111; }
+.skill-cost { font-size: 0.9em; margin-top: 4px; display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
+.cost-orb { font-weight: bold; font-size: 0.9em; }
+.cost-orb.green { color: #8fbc8f; } 
+.cost-orb.blue { color: #80b3ff; }
+.cost-orb.red { color: #ff8080; }
+.cost-orb.white { color: #f0f0f0; }
+.cost-orb.any { color: #f0e68c; }
+.skill-cooldown {
+    position: absolute; top: -5px; right: -5px; background: #dc3545; color: white; width: 20px; height: 20px; border-radius: 50%; font-size: 0.8em; font-weight: bold; display: flex; align-items: center; justify-content: center;
+}
+
+/* Skill Queue Bar */
+#skill-queue-bar {
+    background: #111; border: 1px solid #444; border-radius: 5px; padding: 10px; margin-top: 20px; min-height: 40px; display: flex; gap: 10px; align-items: center;
+}
+.queue-pill {
+    background: #5a5a5a; border: 1px solid #888; border-radius: 20px; padding: 5px 12px; font-size: 0.9em; font-weight: bold; cursor: grab; transition: all 0.2s; white-space: nowrap;
+}
+.queue-pill:first-child { background: #b8860b; color: #111; border-color: #f0e68c; }
+
+/* Controls & Log */
+#controls-log-container { width: 100%; margin-top: 20px; display: flex; gap: 20px; }
+#game-log { flex: 3; height: 150px; background: #2b2b2b; border: 1px solid #444; border-radius: 5px; padding: 10px; overflow-y: auto; font-family: "Courier New", Courier, monospace; font-size: 0.9em; }
+#controls { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+#controls button { padding: 15px; font-size: 1.1em; font-weight: bold; border-radius: 5px; border: none; cursor: pointer; text-transform: uppercase; }
+#end-turn-btn { background-color: #f0e68c; color: #333; }
+#give-up-btn { background-color: #dc3545; color: white; }
+#exchange-btn { background-color: #007bff; color: white; }
+#back-to-lobby-btn { background-color: #28a745; color: white; padding: 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.2em; font-weight: bold; }
+
+/* End Game Modal */
+#end-game-text { font-size: 2em; margin-top: 0; margin-bottom: 20px; }
+#end-game-text.win { color: #28a745; }
+#end-game-text.loss { color: #dc3545; }
+
+/* Chakra Picker Modal */
+.modal-orb {
+    padding: 10px 15px; font-size: 1.2em; font-weight: bold; border-radius: 5px; cursor: pointer; margin: 5px;
+}
+.modal-orb:hover:not(:disabled) { transform: scale(1.1); }
+.modal-orb:disabled { opacity: 0.3; cursor: not-allowed; }
+.modal-orb.green { background: #28a745; border: 1px solid #8fbc8f; color: #fff; }
+.modal-orb.blue { background: #305bc9; border: 1px solid #4d8aff; color: #fff; }
+.modal-orb.red { background: #c93030; border: 1px solid #ff4d4d; color: #fff; }
+.modal-orb.white { background: #b0b0b0; border: 1px solid #ffffff; color: #222; }
