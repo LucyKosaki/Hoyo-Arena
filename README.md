@@ -14,7 +14,7 @@ This should open a browser window with both the admin login and the website that
 
 You need to create a new user through login and then manually set admin to true in the mongoDB database for that user to be able to log into the admin panel.
 
-This should be it for local setup.
+This should be it for local setup. You can now create characters in the admin panel and play them on the client.
 If you want to publish it online, you need to host it somewhere properly.
 
 Current Status of the Project:
