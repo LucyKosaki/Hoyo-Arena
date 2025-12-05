@@ -1,0 +1,988 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#app, #login-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#login-container {
+    max-width: 400px;
+    background: #2b2b2b;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+h1, h2 {
+    color: #ffa500;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background: #333;
+    color: #fff;
+    font-size: 1em;
+    box-sizing: border-box; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+button {
+    padding: 12px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background: #007bff;
+    color: white;
+    transition: all 0.2s;
+}
+button:hover {
+    opacity: 0.9;
+}
+button:disabled {
+    background: #333;
+    color: #777;
+    cursor: not-allowed;
+}
+
+#logout-btn, form button {
+    width: 100%;
+}
+#logout-btn {
+    width: auto;
+    background: #dc3545;
+}
+
+.widget {
+    background: #2b2b2b;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+#admin-message {
+    font-size: 0.9em;
+    color: #dc3545;
+    min-height: 1.2em;
+    text-align: center;
+}
+
+/* --- Tabs --- */
+.tabs {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 5px;
+    border-bottom: 1px solid #444;
+}
+.tab-btn {
+    font-size: 1em;
+    padding: 10px 15px;
+    width: auto;
+    background: #333;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 1px solid #444;
+    border-bottom: none;
+    text-transform: uppercase;
+    flex-grow: 0; 
+    flex-shrink: 0;
+}
+.tab-btn.active {
+    background: #2b2b2b;
+    border-color: #444;
+    color: #ffa500;
+}
+.tab-content {
+    animation: fadeIn 0.3s;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* --- User List Styles --- */
+#user-list-header, .user-card {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr;
+    gap: 10px;
+    padding: 10px 15px;
+    align-items: center;
+}
+#user-list-header {
+    font-weight: bold;
+    color: #aaa;
+    border-bottom: 1px solid #444;
+}
+.user-card {
+    background: #333;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+.user-card:hover {
+    background: #444;
+}
+.user-card span {
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.user-card.admin .user-name {
+    color: #ffa500;
+}
+.user-card .edit-user-btn {
+    padding: 5px 10px;
+    font-size: 0.9em;
+    width: auto;
+}
+
+/* --- Character List Styles --- */
+#char-list-header, .char-display-card {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    gap: 10px;
+    padding: 10px 15px;
+    align-items: center;
+}
+#char-list-header {
+    font-weight: bold;
+    color: #aaa;
+    border-bottom: 1px solid #444;
+    margin-top: 20px;
+}
+.char-display-card {
+    background: #333;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.char-display-card:hover {
+    background: #444;
+}
+.char-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.char-actions .edit-char-btn {
+    width: auto;
+    font-size: 0.9em;
+    background: #28a745;
+}
+.char-actions .delete-char-btn {
+    width: auto;
+    font-size: 0.9em;
+    background: #dc3545;
+}
+
+
+/* --- Stats Table Styles --- */
+#stats-table-container {
+    margin-top: 15px;
+    overflow-x: auto;
+}
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+.stats-table th, .stats-table td {
+    border: 1px solid #444;
+    padding: 10px;
+    text-align: left;
+}
+.stats-table th {
+    background: #333;
+    color: #ffa500;
+    cursor: pointer;
+    user-select: none;
+}
+.stats-table th:hover {
+    background: #444;
+}
+.stats-table th .sort-arrow {
+    display: inline-block;
+    margin-left: 5px;
+    opacity: 0.5;
+}
+.stats-table th.sorted-asc .sort-arrow {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+.stats-table th.sorted-desc .sort-arrow {
+    opacity: 1;
+    transform: rotate(180deg);
+}
+.stats-table .num-col {
+    text-align: right;
+    font-weight: bold;
+}
+
+
+/* --- Modal Styles --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    overflow-y: auto; 
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.modal-content {
+    background: #2b2b2b;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    width: 90%;
+    max-height: 90vh; 
+    overflow-y: auto;
+    position: relative; /* Context for sticky footer */
+}
+.modal-content h2, .modal-content h3 {
+    margin-top: 0;
+}
+.modal-content label {
+    display: block;
+    text-align: left;
+    margin: 15px 0 5px;
+    font-weight: bold;
+    color: #aaa;
+}
+.char-id-display {
+    text-align: left;
+    color: #aaa;
+}
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+    
+    /* --- STICKY FOOTER LOGIC --- */
+    position: sticky;
+    bottom: -20px; /* Offset parent padding */
+    background: #2b2b2b;
+    padding-top: 15px;
+    padding-bottom: 20px; /* Compensate offset */
+    border-top: 1px solid #444;
+    z-index: 50;
+}
+.modal-buttons button {
+    width: auto;
+    font-size: 1em;
+}
+.save-btn { background: #28a745; }
+.cancel-btn { background: #6c757d; }
+
+/* Edit User Modal */
+#edit-user-modal .modal-content {
+    max-width: 450px;
+}
+#edit-char-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    background: #111;
+    padding: 10px;
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+.char-checkbox {
+    display: flex;
+    align-items: center;
+    background: #333;
+    padding: 5px 8px;
+    border-radius: 3px;
+}
+.char-checkbox input {
+    width: auto;
+    margin: 0 8px 0 0;
+}
+
+/* Edit Character Modal Styles */
+#edit-char-modal .modal-content {
+    max-width: 900px;
+}
+#skill-forms-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.skill-group {
+    background: #333;
+    border-radius: 5px;
+    border: 1px solid #444;
+    overflow: hidden; /* For cleaner collapse */
+}
+/* Collapsible Header Styling */
+.skill-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: #3e3e3e;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid #444;
+}
+.skill-header-bar:hover {
+    background: #4a4a4a;
+}
+.skill-group.collapsed .skill-header-bar {
+    border-bottom: none;
+}
+.skill-title-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.skill-title-section h3 {
+    margin: 0;
+    color: #90ee90;
+    border: none;
+    padding: 0;
+}
+.skill-summary {
+    color: #ccc;
+    font-weight: normal;
+    font-size: 0.9em;
+}
+.toggle-icon {
+    color: #aaa;
+    width: 20px;
+    text-align: center;
+}
+/* Body content padding */
+.skill-body {
+    padding: 15px;
+}
+
+.skill-cost-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+.skill-cost-grid label {
+    margin: 0;
+    font-size: 0.9em;
+    color: #ccc;
+    text-align: center;
+}
+.skill-cost-grid label input {
+    margin-bottom: 0;
+}
+
+/* Skill classification grid */
+.skill-class-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* Effect List */
+.effects-list {
+    margin-top: 15px;
+    padding-left: 0;
+    list-style: none;
+    border: 1px solid #555;
+    padding: 5px;
+    border-radius: 5px;
+    min-height: 30px;
+}
+.effect-pill {
+    background: #4a4a4a;
+    padding: 8px 12px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    border: 1px solid #555;
+    cursor: grab;
+}
+.effect-pill.dragging {
+    opacity: 0.4;
+}
+.effect-pill.drag-over {
+    border-bottom: 3px solid #f0e68c;
+}
+.effect-pill:hover {
+    background: #555;
+}
+.effect-pill-label {
+    font-weight: bold;
+    color: #f0e68c;
+}
+.effect-pill-desc {
+    color: #ccc;
+    font-size: 0.9em;
+}
+.effect-pill-delete-btn {
+    background: #dc3545;
+    color: white;
+    padding: 3px 8px;
+    font-size: 0.9em;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+}
+
+.add-effect-btn {
+    background: #007bff;
+    font-size: 1em;
+    width: auto;
+    padding: 8px 12px;
+    margin-top: 10px;
+}
+
+/* Effect configuration styles */
+.effect-config-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 10px;
+    background: #3e3e3e;
+    border-radius: 4px;
+}
+.effect-config-item {
+    display: flex;
+    flex-direction: column;
+}
+.effect-config-item label {
+    margin: 0 0 5px 0;
+    font-size: 0.9em;
+}
+.effect-config-item input,
+.effect-config-item select {
+    margin: 0;
+}
+.effect-config-checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    grid-column: 1 / -1; /* Span full width */
+}
+.effect-config-checkbox input {
+    width: auto;
+    margin: 0;
+}
+.effect-config-checkbox label {
+    margin: 0;
+}
+
+/* --- Effect List Styles --- */
+#effect-list-header, .effect-card {
+    display: grid;
+    grid-template-columns: 1.5fr 1.5fr 1fr 1fr;
+    gap: 10px;
+    padding: 10px 15px;
+    align-items: center;
+}
+#effect-list-header {
+    font-weight: bold;
+    color: #aaa;
+    border-bottom: 1px solid #444;
+}
+.effect-card {
+    background: #333;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+.effect-card:hover {
+    background: #444;
+}
+.effect-card .item-desc {
+    font-size: 0.9em;
+    color: #ccc;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.effect-card .num-col {
+    text-align: right;
+    font-weight: bold;
+}
+.effect-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.effect-actions .edit-effect-btn {
+    width: auto;
+    font-size: 0.9em;
+    background: #28a745;
+}
+.effect-actions .delete-effect-btn {
+    width: auto;
+    font-size: 0.9em;
+    background: #dc3545;
+}
+
+
+/* --- Mission List Styles (NEW EXPANDABLE) --- */
+#mission-list-header, .mission-card {
+    display: grid;
+    /* Added small column for drag handle */
+    grid-template-columns: 30px 1.5fr 1.5fr 1fr 1fr;
+    gap: 10px;
+    padding: 10px 15px;
+    align-items: center;
+}
+#mission-list-header {
+    font-weight: bold;
+    color: #aaa;
+    border-bottom: 1px solid #444;
+}
+.mission-card {
+    background: #333;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: move; /* Indicate drag */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.mission-card:hover {
+    background: #444;
+}
+.mission-card.dragging {
+    opacity: 0.5;
+    background: #555;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+}
+.drag-handle {
+    cursor: grab;
+    color: #777;
+    font-size: 1.2em;
+    user-select: none;
+}
+.mission-card .mission-name {
+    font-weight: bold;
+}
+.mission-card .mission-desc {
+    font-size: 0.9em;
+    color: #ccc;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mission-card .edit-mission-btn {
+    width: auto;
+    font-size: 0.9em;
+    background: #28a745;
+}
+.mission-card .delete-mission-btn {
+    width: auto;
+    font-size: 0.9em;
+    background: #dc3545;
+}
+.mission-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.add-btn {
+    background: #007bff;
+    font-size: 1em;
+    width: auto;
+    padding: 8px 12px;
+    margin-top: 5px;
+}
+
+/* --- Edit Mission Modal --- */
+.list-item {
+    background: #444;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #555;
+}
+.list-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.list-item-header h4 {
+    margin: 0;
+    color: #f0e68c;
+}
+.delete-item-btn {
+    background: #dc3545;
+    padding: 2px 8px;
+    font-size: 0.8em;
+    cursor: pointer;
+    border: none;
+}
+.list-item-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* --- Auth Styles --- */
+#auth-container {
+    max-width: 400px;
+}
+#auth-container h2 {
+    margin-top: 0;
+    color: #ffa500;
+}
+#auth-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+#auth-container input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background: #333;
+    color: #fff;
+    font-size: 1em;
+}
+#auth-container button {
+    padding: 12px;
+    font-size: 1.1em;
+    background: #007bff;
+    color: white;
+}
+#auth-container form:last-of-type button {
+    background: #28a745;
+}
+#auth-container button:hover {
+    opacity: 0.9;
+}
+#auth-message {
+    font-size: 0.9em;
+    color: #dc3545;
+    min-height: 1.2em;
+}
+
+/* --- Shop Item List Styles --- */
+#shop-item-list-header, .shop-item-card {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 10px 15px;
+    align-items: center;
+}
+#shop-item-list-header {
+    font-weight: bold;
+    color: #aaa;
+    border-bottom: 1px solid #444;
+}
+.shop-item-card {
+    background: #333;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+.shop-item-card:hover {
+    background: #444;
+}
+.shop-item-card .item-name {
+    font-weight: bold;
+}
+.shop-item-card .item-desc {
+    font-size: 0.9em;
+    color: #ccc;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.shop-item-card .edit-item-btn {
+    width: auto;
+    font-size: 0.9em;
+    background: #28a745;
+}
+.shop-item-card .delete-item-btn {
+    width: auto;
+    font-size: 0.9em;
+    background: #dc3545;
+}
+.shop-item-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* --- Edit Gacha Modal --- */
+.rarity-pool {
+    background: #444;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+.rarity-pool-header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.rarity-pool-header label {
+    margin: 0;
+    font-weight: bold;
+    color: #f0f0f0;
+}
+.rarity-pool-header input {
+    width: 80px;
+    margin: 0;
+}
+.rarity-pool .pool-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+.pool-item-pill {
+    background: #2b2b2b;
+    padding: 8px 12px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.pool-item-pill button {
+    padding: 2px 8px;
+    font-size: 0.8em;
+}
+.pool-item-name {
+    font-weight: bold;
+}
+.pool-item-pill.rarity-gold .pool-item-name { color: #ffd700; }
+.pool-item-pill.rarity-purple .pool-item-name { color: #ee82ee; }
+.pool-item-pill.rarity-blue .pool-item-name { color: #80b3ff; }
+
+/* --- Gacha List Styles --- */
+#banner-list-header, .banner-card {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.5fr 1fr;
+    gap: 10px;
+    padding: 10px 15px;
+    align-items: center;
+}
+#banner-list-header {
+    font-weight: bold;
+    color: #aaa;
+    border-bottom: 1px solid #444;
+}
+.banner-card {
+    background: #333;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+.banner-card:hover {
+    background: #444;
+}
+.banner-card .banner-name {
+    font-weight: bold;
+}
+.banner-card .banner-desc {
+    font-size: 0.9em;
+    color: #ccc;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.banner-card .edit-banner-btn {
+    width: auto;
+    font-size: 0.9em;
+    background: #28a745;
+}
+.banner-card .delete-banner-btn {
+    width: auto;
+    font-size: 0.9em;
+    background: #dc3545;
+}
+.banner-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* --- Edit Gacha Modal --- */
+.rarity-pool {
+    background: #444;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+.rarity-pool-header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.rarity-pool-header label {
+    margin: 0;
+    font-weight: bold;
+    color: #f0f0f0;
+}
+.rarity-pool-header input {
+    width: 80px;
+    margin: 0;
+}
+.rarity-pool .pool-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+.pool-item-pill {
+    background: #2b2b2b;
+    padding: 8px 12px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.pool-item-pill button {
+    padding: 2px 8px;
+    font-size: 0.8em;
+}
+.pool-item-name {
+    font-weight: bold;
+}
+.pool-item-pill.rarity-gold .pool-item-name { color: #ffd700; }
+.pool-item-pill.rarity-purple .pool-item-name { color: #ee82ee; }
+.pool-item-pill.rarity-blue .pool-item-name { color: #80b3ff; }
+
+/* --- Tags/Chips Styles --- */
+.tag-input-wrapper {
+    border: 1px solid #555;
+    background: #333;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.tag-list {
+    display: contents; 
+}
+.tag-chip {
+    background: #007bff;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    animation: fadeIn 0.2s;
+}
+.tag-chip .close-tag {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1em;
+    line-height: 0.8;
+    opacity: 0.8;
+}
+.tag-chip .close-tag:hover {
+    opacity: 1;
+    color: #ffcccc;
+}
+#char-tag-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    flex-grow: 1;
+    min-width: 120px;
+    color: #fff;
+    margin: 0;
+    padding: 5px;
+    font-size: 0.95em;
+}
+#char-tag-input:focus {
+    box-shadow: none;
+    border: none;
+}
+
+/* News Editor specific tweaks */
+#news-editor-view .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+#news-editor-view input[type="text"],
+#news-editor-view select,
+#news-editor-view textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background: #333;
+    color: #eee;
+    box-sizing: border-box; 
+}
+/* Quill overrides for dark theme compatibility */
+.ql-toolbar.ql-snow {
+    background: #ddd;
+    color: #333;
+    border-color: #ccc;
+}
+.ql-container.ql-snow {
+    border-color: #ccc;
+}
+.ql-editor {
+    font-family: inherit;
+    font-size: 16px;
+}
+/* Status Badges for Table */
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.status-badge.published {
+    background: #28a745;
+    color: white;
+}
+.status-badge.draft {
+    background: #6c757d;
+    color: white;
+}

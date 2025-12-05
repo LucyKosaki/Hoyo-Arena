@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel=\"stylesheet\">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <div id="login-container">
+            <h2>Admin Login</h2>
+            <form id="admin-login-form">
+                <input type="text" id="admin-username" placeholder="Username" required>
+                <input type="password" id="admin-password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p id="admin-message"></p>
+        </div>
+
+        <div id="admin-panel" class="hidden">
+            <header>
+                <h1>Admin Dashboard</h1>
+                <button id="logout-btn">Logout</button>
+            </header>
+
+            <nav class="tabs">
+                <button class="tab-btn active" data-tab="stats">Stats</button>
+                <button class="tab-btn" data-tab="users">User Management</button>
+                <button class="tab-btn" data-tab="characters">Character Management</button>
+                <button class="tab-btn" data-tab="effects">Effect Management</button>
+                <button class="tab-btn" data-tab="news">News Management</button> 
+                <button class="tab-btn" data-tab="missions">Mission Management</button>
+                <button class="tab-btn" data-tab="shop">Shop Management</button>
+                <button class="tab-btn" data-tab="gacha">Gacha Management</button> 
+            </nav>
+
+            <main>
+                <div id="stats-page" class="tab-content active">
+                    <section class="widget">
+                        <h2>Character Usage Stats</h2>
+                        <button id="load-stats-btn">Refresh Stats</button>
+                        <div id="stats-table-container"></div>
+                    </section>
+                </div>
+
+                <div id="users-page" class="tab-content hidden">
+                    <section class="widget">
+                        <h2>Manage Users</h2>
+                        <button id="load-users-btn">Load All Users</button>
+                        <div id="user-list-header" class="hidden">
+                            <span>Username</span>
+                            <span>Registered</span>
+                            <span>ELO</span>
+                            <span>Actions</span>
+                        </div>
+                        <div id="user-list"></div>
+                    </section>
+                </div>
+                
+                <div id="characters-page" class="tab-content hidden">
+                    <section class="widget">
+                        <h2>Add New Character</h2>
+                        <form id="add-char-form">
+                            <div class="form-grid">
+                                <input type="text" id="char-id" placeholder="Character ID (e.g., 'gaara')" required>
+                                <input type="text" id="char-name" placeholder="Display Name (e.g., 'Gaara')" required>
+                            </div>
+                            <button type="submit">Add New Character</button>
+                        </form>
+                        <hr>
+                        <button id="load-characters-btn">Load All Characters</button>
+                        <h3>Existing Characters</h3>
+                        <div id="char-list-header" class="hidden">
+                            <span>ID / Name</span>
+                            <span>Total Uses (Win %)</span>
+                            <span>Actions</span>
+                        </div>
+                        <div id="char-list"></div>
+                    </section>
+                </div>
+
+                <div id="effects-page" class="tab-content hidden">
+                    <section class="widget">
+                        <h2>Manage Global Effects</h2>
+                        <p>Create and manage reusable, conditional effects (e.g., "Poison", "Stun_1_Turn", "RageBuilder") that skills can apply.</p>
+                        <button id="add-new-effect-btn">Add New Global Effect</button>
+                        <hr>
+                        <button id="load-effects-btn">Load All Effects</button>
+                        <div id="effect-list-header" class="hidden">
+                            <span>Effect Name</span>
+                            <span>Description</span>
+                            <span>Logic Blocks</span>
+                            <span>Actions</span>
+                        </div>
+                        <div id="effect-list"></div>
+                    </section>
+                </div>
+
+                <div id="news-page" class="tab-content hidden">
+                    <section class="widget">
+                        <div id="news-list-view">
+                            <h2>News Articles</h2>
+                            <button id="btn-add-news" class="add-btn" style="margin-bottom: 15px;">Create New Article</button>
+                            <table id="news-table" style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid #444; text-align: left;">
+                                        <th style="padding: 10px;">Date</th>
+                                        <th style="padding: 10px;">Title</th>
+                                        <th style="padding: 10px;">Category</th>
+                                        <th style="padding: 10px;">Status</th>
+                                        <th style="padding: 10px;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    </tbody>
+                            </table>
+                        </div>
+
+                        <div id="news-editor-view" class="hidden">
+                            <h2>Article Editor</h2>
+                            <form id="news-form">
+                                <input type="hidden" id="news-id">
+                                
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="news-title">Title</label>
+                                        <input type="text" id="news-title" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="news-category">Category</label>
+                                        <select id="news-category">
+                                            <option value="NOTICE">Notice</option>
+                                            <option value="EVENT">Event</option>
+                                            <option value="PATCH NOTES">Patch Notes</option>
+                                            <option value="COMMUNITY">Community</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <div class="effect-config-checkbox">
+                                        <input type="checkbox" id="news-published">
+                                        <label for="news-published">Published (Visible on Website)</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-top: 20px;">
+                                    <label>Content Body</label>
+                                    <div id="news-quill-editor" style="height: 400px; background: #f0f0f0; color: #333;"></div>
+                                </div>
+
+                                <div class="modal-buttons" style="margin-top: 20px;">
+                                    <button type="submit" class="save-btn">Save Article</button>
+                                    <button type="button" id="btn-cancel-news" class="cancel-btn">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+                
+                <div id="missions-page" class="tab-content hidden">
+                    <section class="widget">
+                        <h2>Manage Missions</h2>
+                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                            <button id="add-new-mission-btn">Add New Mission</button>
+                            <button id="save-mission-order-btn" style="background: #17a2b8;">Save Order</button>
+                        </div>
+                        <p style="font-size: 0.9em; color: #aaa;">Drag and drop missions to reorder them. Click "Save Order" to apply.</p>
+                        <hr>
+                        <button id="load-missions-btn">Load All Missions</button>
+                        <div id="mission-list-header" class="hidden">
+                            <span>Name / ID</span>
+                            <span>Goals</span>
+                            <span>Rewards</span>
+                            <span>Actions</span>
+                        </div>
+                        <div id="mission-list" class="sortable-list"></div>
+                    </section>
+                </div>
+                
+                <div id="shop-page" class="tab-content hidden">
+                    <section class="widget">
+                        <h2>Manage Shop Items</h2>
+                        <button id="add-new-shop-item-btn">Add New Shop Item</button>
+                        <hr>
+                        <button id="load-shop-items-btn">Load All Shop Items</button>
+                        <div id="shop-item-list-header" class="hidden">
+                            <span>Item Name / ID</span>
+                            <span>Type</span>
+                            <span>Cost</span>
+                            <span>Actions</span>
+                        </div>
+                        <div id="shop-item-list"></div>
+                    </section>
+                </div>
+                
+                <div id="gacha-page" class="tab-content hidden">
+                    <section class="widget">
+                        <h2>Manage Gacha Banners</h2>
+                        <button id="add-new-banner-btn">Add New Banner</button>
+                        <hr>
+                        <button id="load-banners-btn">Load All Banners</button>
+                        <div id="banner-list-header" class="hidden">
+                            <span>Banner Name / ID</span>
+                            <span>Cost</span>
+                            <span>Rarities / Pity</span>
+                            <span>Actions</span>
+                        </div>
+                        <div id="banner-list"></div>
+                    </section>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <div id="edit-user-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width: 450px;">
+            <h2 id="edit-user-title">Edit User</h2>
+            <form id="edit-user-form">
+                <div class="form-grid">
+                    <div>
+                        <label for="edit-elo">Rank Points (ELO)</label>
+                        <input type="number" id="edit-elo">
+                    </div>
+                    <div>
+                        <label for="edit-hoyo">Hoyo</label>
+                        <input type="number" id="edit-hoyo">
+                    </div>
+                </div>
+                <label for="edit-primogems">Primogems</label>
+                <input type="number" id="edit-primogems">
+                
+                <label>Unlocked Characters</label>
+                <div id="edit-char-grid"></div>
+                <div class="modal-buttons">
+                    <button type="submit" class="save-btn">Save Changes</button>
+                    <button type="button" id="edit-cancel-btn" class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="edit-char-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width: 900px;">
+            <h2 id="edit-char-title">Edit Character</h2>
+            <form id="edit-char-details-form">
+                <p class="char-id-display">ID: <span id="char-id-value"></span></p>
+                <label for="edit-char-name">Display Name</label>
+                <input type="text" id="edit-char-name" required>
+                
+                <div class="form-grid">
+                    <div>
+                        <label for="edit-char-icon">Character Icon URL</label>
+                        <input type="text" id="edit-char-icon" placeholder="assets/icons/char.png">
+                    </div>
+                    <div>
+                        <label for="edit-char-splash">Splash Art URL</label>
+                        <input type="text" id="edit-char-splash" placeholder="assets/art/splash.png">
+                    </div>
+                </div>
+                <label for="edit-char-desc">Character Description</label>
+                <textarea id="edit-char-desc" rows="3"></textarea>
+
+                <label>Category Tags (Press Enter/Comma to add)</label>
+                <div class="tag-input-wrapper">
+                    <div id="char-tag-list" class="tag-list"></div>
+                    <input type="text" id="char-tag-input" list="existing-char-tags" placeholder="Add category (e.g. Akatsuki, Captain)...">
+                    <datalist id="existing-char-tags"></datalist>
+                </div>
+
+                <label for="edit-char-passives">Passive Effects (comma-separated names)</label>
+                <input type="text" id="edit-char-passives" placeholder="e.g., RageBuilder, PoisonSkin">
+
+                <div id="skill-forms-container"></div>
+                
+                <button type="button" id="add-skill-btn" class="add-btn" style="margin-top:15px;">Add New Skill</button>
+
+                <div class="modal-buttons">
+                    <button type="submit" class="save-btn">Save Character</button>
+                    <button type="button" id="edit-char-cancel-btn" class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="edit-effect-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width: 900px;">
+            <h2 id="edit-effect-title">Edit Effect</h2>
+            <form id="edit-effect-form">
+                <label for="effect-name">Effect Name (Unique ID)</label>
+                <input type="text" id="effect-name" required placeholder="e.g., Poison_Basic, RunugangaHeal">
+                
+                <label for="effect-desc">Description</label>
+                <input type="text" id="effect-desc" placeholder="What does this do?">
+                
+                <div class="form-grid">
+                    <div>
+                        <label for="effect-max-stacks">Max Stacks</label>
+                        <input type="number" id="effect-max-stacks" value="1">
+                    </div>
+                    <div>
+                        <label>Options</label>
+                        <div class="effect-config-checkbox">
+                            <input type="checkbox" id="effect-is-permanent">
+                            <label for="effect-is-permanent">Is Permanent?</label>
+                        </div>
+                        <div class="effect-config-checkbox">
+                            <input type="checkbox" id="effect-is-invisible">
+                            <label for="effect-is-invisible">Is Invisible?</label>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Logic Blocks (Triggers)</h3>
+                <div id="logic-blocks-container">
+                    </div>
+                <button type="button" id="add-logic-block-btn" class="add-btn">Add Logic Block (Trigger)</button>
+
+                <div class="modal-buttons">
+                    <button type="submit" class="save-btn">Save Effect</button>
+                    <button type="button" id="edit-effect-cancel-btn" class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="edit-logic-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width: 500px;">
+            <h3 id="edit-logic-title">Edit</h3>
+            <form id="edit-logic-form">
+                <div id="edit-logic-fields-container">
+                    </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="save-btn">Save</button>
+                    <button type="button" id="edit-logic-cancel-btn" class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="add-effect-modal" class="modal-overlay hidden">
+    </div>
+    
+    <div id="edit-mission-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width: 600px;">
+            <h2 id="edit-mission-title">Edit Mission</h2>
+            <form id="edit-mission-form">
+                <label for="mission-id">Mission ID (e.g., "win_3_games")</label>
+                <input type="text" id="mission-id" required>
+                <label for="mission-name">Mission Name</label>
+                <input type="text" id="mission-name" required>
+                
+                <label for="mission-category">Game Category</label>
+                <select id="mission-category">
+                    <option value="Others">Others</option>
+                    <option value="Guns Girl Z">Guns Girl Z</option>
+                    <option value="Honkai Impact 3rd">Honkai Impact 3rd</option>
+                    <option value="Tears of Themis">Tears of Themis</option>
+                    <option value="Genshin Impact">Genshin Impact</option>
+                    <option value="Honkai Star Rail">Honkai Star Rail</option>
+                    <option value="Zenless Zone Zero">Zenless Zone Zero</option>
+                    <option value="Honkai Nexus Anima">Honkai Nexus Anima</option>
+                    <option value="Petit Planet">Petit Planet</option>
+                    <option value="Varsapura">Varsapura</option>
+                </select>
+                
+                <label for="mission-desc">Description</label>
+                <input type="text" id="mission-desc">
+                <label for="mission-pic">Picture URL</label>
+                <input type="text" id="mission-pic">
+                
+                <div id="mission-req-static-container" style="margin-top: 15px; padding: 10px; background: #222; border-radius: 5px;">
+                    <label style="color:#f0e68c; margin-top:0; border-bottom: 1px dashed #555; padding-bottom: 5px; display:block; margin-bottom: 10px;">Unlock Requirements</label>
+                    <div class="form-grid">
+                        <div>
+                            <label for="mission-req-elo-input" style="font-size:0.9em; margin:0 0 5px 0;">Min ELO</label>
+                            <input type="number" id="mission-req-elo-input" value="0">
+                        </div>
+                        <div>
+                            <label for="mission-req-prev-input" style="font-size:0.9em; margin:0 0 5px 0;">Previous Mission IDs (Comma sep)</label>
+                            <input type="text" id="mission-req-prev-input" placeholder="e.g. mission_1, mission_2">
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+                <h3>Goals</h3>
+                <div id="mission-goals-list"></div>
+                <button type="button" id="add-goal-btn" class="add-btn">Add Goal</button>
+                <h3>Rewards</h3>
+                <div id="mission-rewards-list"></div>
+                <button type="button" id="add-reward-btn" class="add-btn">Add Reward</button>
+                <div class="modal-buttons">
+                    <button type="submit" class="save-btn">Save Mission</button>
+                    <button type="button" id="edit-mission-cancel-btn" class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="edit-shop-item-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width: 600px;">
+            <h2 id="edit-shop-item-title">Edit Shop Item</h2>
+            <form id="edit-shop-item-form">
+                <label for="shop-item-id">Item ID (e.g., "buy_amber")</label>
+                <input type="text" id="shop-item-id" required>
+                <label for="shop-item-name">Name</label>
+                <input type="text" id="shop-item-name" required>
+                <label for="shop-item-desc">Description</label>
+                <input type="text" id="shop-item-desc">
+                <label for="shop-item-icon">Icon URL</label>
+                <input type="text" id="shop-item-icon">
+                <div class="list-item-grid">
+                    <div>
+                        <label for="shop-item-type">Item Type</label>
+                        <select id="shop-item-type">
+                            <option value="character">Character</option>
+                            <option value="currency_pack">Currency Pack</option>
+                        </select>
+                    </div>
+                    <div id="shop-item-type-field"></div>
+                </div>
+                <div class="list-item-grid">
+                    <div>
+                        <label for="shop-item-currency">Currency</label>
+                        <select id="shop-item-currency">
+                            <option value="hoyo">Hoyo</option>
+                            <option value="primogems">Primogems</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="shop-item-cost">Cost</label>
+                        <input type="number" id="shop-item-cost" value="100" required>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="save-btn">Save Item</button>
+                    <button type="button" id="edit-shop-item-cancel-btn" class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="edit-gacha-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width: 900px;">
+            <h2 id="edit-gacha-title">Edit Gacha Banner</h2>
+            <form id="edit-gacha-form">
+                <div class="form-grid">
+                    <div>
+                        <label for="gacha-banner-id">Banner ID (e.g., "genshin_banner")</label>
+                        <input type="text" id="gacha-banner-id" required>
+                    </div>
+                    <div>
+                        <label for="gacha-banner-name">Banner Name</label>
+                        <input type="text" id="gacha-banner-name" required>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div>
+                        <label for="gacha-banner-currency">Currency</label>
+                        <select id="gacha-banner-currency">
+                            <option value="primogems">Primogems</option>
+                            <option value="hoyo">Hoyo</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="gacha-banner-cost">Cost per Pull</label>
+                        <input type="number" id="gacha-banner-cost" value="1" required>
+                    </div>
+                </div>
+                <label for="gacha-banner-rules">Gacha Rules / Info Text</label>
+                <textarea id="gacha-banner-rules" rows="4"></textarea>
+                <hr>
+                <h3>Pity System</h3>
+                <div class="form-grid">
+                    <div>
+                        <label for="gacha-gold-pity-applies">Gold Pity?</label>
+                        <select id="gacha-gold-pity-applies">
+                            <option value="true">Yes</option>
+                            <option value="false" selected>No</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="gacha-gold-pity-limit">Gold Pity at (e.g., 90)</label>
+                        <input type="number" id="gacha-gold-pity-limit" value="90">
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div>
+                        <label for="gacha-purple-pity-applies">Purple Pity?</label>
+                        <select id="gacha-purple-pity-applies">
+                            <option value="true">Yes</option>
+                            <option value="false" selected>No</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="gacha-purple-pity-limit">Purple Pity at (e.g., 10)</label>
+                        <input type="number" id="gacha-purple-pity-limit" value="10">
+                    </div>
+                </div>
+                <hr>
+                <h3>Rarity Pools (Rates must add up to 1.0)</h3>
+                <div id="gacha-rarity-pools"></div>
+                <div class="modal-buttons">
+                    <button type="submit" class="save-btn">Save Banner</button>
+                    <button type="button" id="edit-gacha-cancel-btn" class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="add-pool-item-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width: 400px;">
+            <h3 id="add-pool-item-title">Add Reward Item</h3>
+            <form id="add-pool-item-form">
+                <label for="pool-item-type">Reward Type</label>
+                <select id="pool-item-type">
+                    <option value="character">Character</option>
+                    <option value="hoyo">Hoyo</option>
+                    <option value="primogems">Primogems</option>
+                </select>
+                <div id="pool-item-fields-container"></div>
+                <div class="modal-buttons">
+                    <button type="submit" class="save-btn">Add Item</button>
+                    <button type="button" id="add-pool-item-cancel-btn" class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="admin.js" type="module"></script>
+</body>
+</html>
