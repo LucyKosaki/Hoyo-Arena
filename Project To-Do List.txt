@@ -1,0 +1,508 @@
+Lobby - Missions:
+
+Mission list in the style of genshin/star rail.
+List will show mission title, how many mission goals you have completed and a claim button on the right side.
+Clicking on a mission will expand the view downwards with a mission image, a proper mission description and the list of goals and progress on each.
+It also shows the requirements and rewards.
+
+You unlock most characters through missions, gacha is just for a handful of special ones.
+
+Mission tabs:
+Genshin
+Star Rail
+Honkai Impact 3rd
+Zenless
+Themis
+Houkai Gakuen
+Other
+Event
+
+
+Website:
+
+Website profile that looks like the hoyolab page with all those account infos and stats. Unique website link for each user like hoyo-arena.com/profile/LucyKosaki.
+On the website after login, it should say welcome (player name).
+
+Ranked list of top 100 players (highest level)
+Ranked list of top 100 guilds (highest level)
+guide how to play
+
+Lobby - Friends:
+adding users as friends
+can set 3 characters which can be borrowed by friends a limited number of times for ranked/unranked play
+can invite friends in room/lobby play
+
+Lobby - Awards:
+Simple achivement system with categories, visually styled like HSR
+
+Lobby
+A screen somewhere that shows any current events or ranked season timers
+
+
+Lobby - Settings:
+
+Layout selection: Ingame match layout style classic (naruto arena inspired) vs modern (TCG inspired)
+Voice language selection: for the voice clips when characters use their strongest skill or get defeated
+Select lobby background image
+Select match background image
+select lobby music
+select match music
+
+music selection list screen:
+left side choose game
+right side select music
+can activate multiple select - game will than go through tracks randomly during battle
+can select menu sfx (different hoyo games)
+can make background switch to different BGs
+
+default music:
+lobby: ggz - Shopsation
+win game - hi3rd Y
+loose game - Hi3rd rebirth
+battle theme - HSR crises
+
+
+
+Lobby - Profile:
+view and edit your profile
+select title
+select profile border
+profile image selector (dont let ppl use own image - maybe allow image import from hoyolab?)
+
+
+Lobby - Guild:
+create or join guild
+guild icon image selector
+winning ranked matches gives guild exp
+as guild levels up, gives higher weekly gift packs and expands guild max size
+maybe special items or a character you can only get through guild activities
+guilds can challenge other guilds for fun - for specific amount of time lobby matches among those guilds will be recorded
+
+
+Login: needs logic that one account can only be logged in once at the same time
+
+Lobby - Playbuttons:
+add a little "i" next to each button that explains the difference between the different modes:
+Ranked: Updates score and completes missions
+Unranked: Doesnt update score but completes missions
+Lobby: Can make rooms with settings for special rules, can invite friends or just make it open to anyone to join, easy custom play - doesnt update score or missions. Allows spectating.
+
+Admin Panel - Match Hisory
+Admin Panel needs a way to display and manage past match data:
+Display match data of specific users, backup and delete old match data.
+
+
+Gamemode Idea:
+Weekly PvE Bosses (bosses with special mechanics outside of regular 3vs3 play, like genshin TCG challenges)
+Clear for base rewards and clear with specific goals for bonus rewards.
+Bosses (rotate each week):
+Kiana Void Herrscher
+The Will of the Honkai GGZ
+Cocolia HSR
+La Signora
+Bringer (ZZZ)
+
+
+Lobby Style idea: replace static splash images with live 2d animated ones
+
+
+Admin Panel - Effect Management:
+
+effect management folder system (can make a folder for each characters effects),
+add new folder, rename folder,
+apply created effects to folders
+
+
+Client Screen:
+when you select a skill and a target, already show skill icons display on the target until end turn (purely visible)
+
+
+On the Lobby:
+free ayaka at level 42 claim button
+
+
+Ranking System & Titles:
+
+You reach a new level every X EXP.
+
+Loosing no exp on loose till lvl 20
+lvl 21-30 win 100, loose 20
+lvl 31-40 win 100, loose 40
+lvl 41-50 win 100, loose 60
+lvl 51-60 win 100, loose 100
+lvl 61-70 win 100, loose 150
+lvl 71+ win 100, loose 200
+
++10exp per streak for winstreak 2+ up to +100
+
+top 10 leaderboard titles
+top 4-10: Hoyo Elite
+top 2-3: Hoyo Legend
+top1: Hoyo Champion
+
+seasonal reset back to lvl 50 if player is over lvl 50.
+
+Anti-Entropy
+Schicksal
+Hexenzirkel
+
+Level Ranks:
+1-4 Proxy
+5-9 Valkyrie
+10-14 Knight of Favonius
+15-19 Masked Fool
+20-24 Flame Chaser
+25-29 Adept
+30-34 Galaxy Ranger
+35-39 Harbinger
+40-44 Schicksal Overseer
+45-49 Archon
+50-54 Void Hunter
+55-59 Herrscher
+60-64 Aeon
+65-69 Descender
+70+ Multiverse Wanderer
+
+Special Title for Testers
+Unlock Titles when reaching ranks the first time
+Unlock Titles for unlocking each character
+Titles for some Missions/Achievements
+Rest of the titles: Shop
+
+
+Lobby - Settings:
+add a feedback button here that links to a google form.
+game credits page:
+
+"this is a non-profit unofficial fan project.
+all characters, sound effects and music belong to Mihoyo/Hoyoverse.
+The website, game, and graphical design made by LucyKosaki.
+
+Testing was done by:"
+
+
+Admin Panel - User Management
+expand for moderation features:
+ban for x amount of time, reset ranking score,
+player gets warning displayed with reason
+history for past offenses
+
+
+Admin panel - Security:
+put admin panel of a whole different server/website and put an IP whitelist for added security
+
+
+Add Rules and ToS to the website:
+boosting with alt accounts in unranked is allowed
+but boosing in ranked is not allowed - level will be reset to 1 - repeated actions = ban
+
+
+Server Gamelogic/Feature:
+
+Add items when setting up teams:
+button to set up item which opens item selection screen.
+Shows all items in the game with locked ones unaccessible.
+
+Items can be used in battle only a limited amount of times (depending on which item usually once or twice)
+and can be used anytime during your turn.
+
+
+Server/Admin Panel:
+Skill effects need an optional checkbox for "cannot be removed".
+
+
+Client - Ingame screen:
+
+Tooltips on effects always show the active effect and the remaining time.
+Need to add many custom phrases to make a "smart" client that can translate and display all the effects to proper sentences.
+
+At the end clean up ingame log with only necessary information.
+Only an account that is admin can see the debug information.
+
+
+Admin Panel/Client:
+
+set different HP values for different characters to make them more unique
+
+
+What each energy color represents:
+Green: Physical
+Blue: Elemental
+Red: Willpower
+White: Unique
+
+First playable alpha character list and their energy distribution:
+
+Amber willpower any
+Kaeya elem unique
+Lisa  elem
+Kiana (St. Freya) willpower unique
+Bronya (St. Freya) phy any
+Raiden Mei (St. Freya)   phy elem
+Nicole  unique elem
+Billy   physical
+Anby    will
+March   elem unique
+Dan Heng  physical
+Natasha  any
+Kyuusyou elem phy unique
+Sirin GGZ  elem any
+
+
+Admin Panel:
+Maintenance Start Button in admin panel.
+When it is activated the game wont accept starting any new matches (unranked and ranked)
+and I can set a time for example 60 minutes until the server will be stopped.
+For any ongoing matches it will display a message at the top every 5 minutes that will stay for 15 seconds
+and say "Server maintenance will begin in X minutes. Please wrap up your ongoing matches and log out to avoid any loss of data. Thank you."
+
+
+Server - Game Logic:
+Does the current setup allow for setting up damage over multiple turns?
+
+
+Server/Admin Panel/Client:
+add "Testing-Only" tag to character that lets players only use the character in private lobby games
+Add "Hidden" tag that lets a character not appear on the character list
+
+User Feel:
+When starting up the game, show 2-3 second display of Lulu's Gaming Den logo.
+from a white scren blends in logo, shows it for 3 seconds, blends out, then get to the login/start game screen
+lobby shows current version, login screen, register screen, settings where you can turn off music audio.
+
+Add 1-2 second loading animation to make the game feel less lightweight and cheap
+
+
+Server/Client:
+
+Add 1-2 minute timer to battles
+When disconnecting, give players 1-2 minutes to reconnect until a match gets decided and the disconnected player looses.
+
+Client:
+
+On match screen add a rount counter display
+
+
+Client/Website:
+
+Add Email verification for register to avoid abuse
+Also let people type the password twice on register to avoid typos
+forgot password button
+
+
+Server/Client:
+Upon first login, autoplay tutorial (uses bunny jump instrumental music)
+(has preset teams on both sides)
+can only click on specific buttons
+onscreen messages by Lulu
+
+Sequence and what gets explained when:
+
+3vs3 - need all 3 opponents down
+beginner gets 1 energy.
+click a skill and hit end turn.
+opponent used X
+you can see in log what opponent did.
+get as many energy as you have alive characters
+rainbow energy means you can use any energy.
+select X
+select which energy you want to use as any energy
+this skill stuns an opponent, meaning they cant act in the next turn
+end turn.
+you can always check characters active effects and their remaining duration by
+hovering your mouse over the icons
+opponent activated damage reduction 
+opponent activated destructible defense
+use piercing damage, destroy destructible
+you can change the order of which the skills will be executed by rearranging them in the skill queue with your mouse.
+opponent turn (deals some damage)
+you are missing one energy for big skill - click this to exchange energy.
+use high damage skill that shows animation
+characters have a vast variety of unique skills and effects
+if you are unsure about opponents skills you can click here to read them
+or look up characters skills on the website
+This concludes the tutorial. If you wanna replay it you can restart in the settings.
+If you hav any more questions feel free to join our discord!
+Hope you have fun in Hoyo Arena!
+
+
+Admin Panel:
+
+add redeem code management:
+can create new codes, set timeframes & rewards
+special characters you can only get from permanently active codes:
+Lumi/DaWei/Homu
+
+Lobby - Character selection
+Add a button where you can save and load preset teams
+
+
+Last:
+
+Security Check
+- how safe is this from keeping attackers out of the admin panel and database
+- how safe it is against hackers; nothing game-relevant should happen on the client side, only on server side
+- API security, APIs should only be able to be accessed by official client/server
+
+
+Initial Launch Char List:
+(chars labled with x are for the first beta where not all features are available yet but the game is already properly playable and ready
+to invite 40-60 testers)
+
+x Amber
+x Barbara
+Beidou
+x Bennett
+Chongyun
+x Diluc
+x Fischl
+x Jean
+x Kaeya
+x Keqing
+x Klee
+x Lisa
+Mona
+Ningguang
+x Noelle
+Qiqi
+Razor
+Sucrose
+x Traveler (anemo)
+- Traveler (geo)
+x Venti
+x Xiangling
+Xingqiu
+
+Arlan
+x Asta
+Bailu
+x Bronya
+x Clara
+x Dan Heng
+Gepard
+x Herta
+x Himeko
+Hook
+Jing Yuan
+x March 7th
+x Natasha
+Pela
+Qingque
+Sampo
+x Seele
+Serval
+Sushang
+Tingyun
+x Trailblazer (physical)
+- Trailblazer (fire)
+Welt
+Yanqing
+
+x Kiana Kaslana (St.Freya)
+x Raiden Mei (St.Freya)
+x Bronya Zaychik (St.Freya)
+x Fu Hua (St.Freya)
+x Murata Himeko (St.Freya)
+x Theresa Apocalypse (St.Freya)
+Kallen Kaslana
+x Siegfried Kaslana
+Cecilia Schariac
+x Durandal
+Rita Rossweisse
+x Welt Yang
+Frederica Nikola Tesla
+Lieserl Albert Einstein
+x Cocolia
+x Wendy
+Sirin
+x Yae Sakura
+Kiana (Knight Moonbeam)
+Bronya (Black Nucelus)
+Fu Hua (Shadow Knight)
+
+Phaethon
+Alexandrina Sebastine
+x Anby Demara
+Anton Ivanov
+Ben Bigger
+x Billy Kid
+Corin Wickes
+x Ellen Joe
+Grace Howard
+Koleda
+x Luciana de Montefo
+x Nekomiya Mana
+x Nicole Demara
+Piper Wheel
+x Soldier 11
+Soukaku
+Von Lycaon
+Zhu Yuan
+
+x Rosa
+x Luke Pearce
+x Artem Wing
+x Vyn Richter
+x Marius von Hagen
+
+x Kiana Kaslana (GGZ)
+x Raiden Mei (GGZ)
+x Bronya Zaychik (GGZ)
+x Sirin (GGZ)
+x Sin Mal
+x Yssring Leavtruth
+x Houraiji Kyuusyou
+
+Other:
+x Homu
+x Lumi
+Da Wei
+Mimo
+
+
+Updates are gonna be named after arcs or themes and while usually following the story of each game, it may also break the expected flow for surprise.
+
+Hi3rd Second Eruption Update
+Kiana Kaslana (Child)
+
+Will of Herrscher Update
+Elysian Realm Update
+
+Anniversary Update with characters players voted for.
+
+Not just make characters based on playable ingame chars, also include characters like
+Signora, Capitano, Jeht, Ellin, Guizhong, Liben, Pahsiv and similar characters from other hoyo games.
+Can also make monsters and certain enemies playable.
+Is more interesting than strictly going for playables.
+
+Lobby/Server:
+Daily/Weekly missions for 
+Primogems/Jades/Crystals/Polychromes
+
+Simple tasks like play 2-3 games a day,
+play 1 game with a genshin/hsr/zzz character ect.
+
+You get Hoyo (the games base currency) from winning ranked battles,
+dailies weeklies and missions.
+
+You get the hoyo-game-specific currencies only through missions and dailies/weeklies.
+
+Maybe optionally also put specific gacha banner character in an event shop from time to time to make it easier to get specific char.
+
+Ideally you should be able to unlock all 1.0 characters, including gacha ones, in about 100-200 hours of gameplay (3-4 months).
+
+Then each update (around every 2 months) adds 5-8 new characters and some new titles, achievements ect.
+Also always re-balance update characters that perform over 60% or under 40% winrate.
+
+Would be best to coincide updates with ranked season reset for a fresh start.
+
+
+
+Further:
+
+Add downloadable client for the game.
+Add lobby and inagme layouts for mobile view.
+
+Try to get Hoyo approval to put it for free on steam and google playstore.
+
+

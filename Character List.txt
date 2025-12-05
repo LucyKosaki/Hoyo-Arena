@@ -1,0 +1,180 @@
+Alpha Chars:
+Amber
+
+Bow Shot
+
+This skill deals 20 energy damage.
+In the following turn this skill will cost 1 any energy.
+
+0cd
+
+Baron Bunny
+
+Amber gets 40 unpiercable damage reduction for 1 turn.
+During this time any new damaging skill used by the enemy will be redirected onto Amber.
+At the end of Ambers next turn, Baron Bunny will deal 10 damage to all enemies + 15 to every enemy that got redirected.
+
+3 cooldown
+
+Fiery Rain
+
+This skill deals 10 damage + 5 affliction damage to all opponents for 2 turns.
+During this time Bow Shot will deal 10 more damage.
+
+3cd
+
+Invul
+
+
+Barbara
+
+Whisper of Water
+15 piercing energy damage for 1 any.
+
+Let the Show begin
+this skill heals barabara for 20 HP for 3 turns.
+If Barbara is at 80 HP or above, it will instead heal the ally with the lowest HP.
+
+Shining Miracle
+Barbara heals herself and all allies for 35 HP and removes all harmful strategic
+and affliction skills on them.
+
+invul
+
+
+
+Klee
+
+Kaboom!
+
+deals 20 energy damage
+klee gets 1 Explosive Spark.
+
+Jumpy Dumpty
+
+deals 10 + 15 + 15 to all damage.
+klee gets 1 explosive spark
+
+Sparks n Splash
+
+This skill deals 20 energy damage to one random enemy each turn.
+This skills damage increases by 5 and duration extends by 1 for each Explosive Spark mark.
+At the end of this skill, remove all explosive sparks.
+
+Secret Hideout
+
+invul
+
+
+
+Kiana Kaslana (St.Freya)
+Raiden Mei (St.Freya)
+Bronya Zaychik (St.Freya)
+Herta
+Dan Heng
+March 7th
+Lucy
+Nicole
+Sirin (GGZ)
+
+Rapid Spray
+
+Uses spray on an opponent. That opponent will continously take 10 affliction damage per round.
+This skill can only be active on one enemy at a time.
+This skill stops when Sirin gets stunned or defeated.
+
+Void Fireworks
+
+This skill can only be used on an enemy affected by Rapid Spray.
+For 2 turns every time that enemy uses a new harmful damaging skill,
+double the damage of Rapid Spray on the following turn.
+
+Space Erosion
+
+This skill can only be used on an enemy affected by Rapid Spray.
+For 2 turns that enemy ignores all helpful skills and deals 10 less damage.
+
+Crisis Awareness
+
+Invul
+
+
+
+Houraiji Kyuusyou
+
+Weapon Switch
+This character starts in great sword mode.
+When this skill is used Kyuusyou switches weapons, first to
+dual daggers, then to heavy gun.
+Her 2nd and 3rd skills will change depending on her current weapon.
+Also this skill will do additional effects if a weapon skill has been used the turn prior:
+Great Sword Skill: deals 10 affliction damage that cannot be countered or reflected
+Dual Daggers Skill: Stuns all enemies strategic skills for 1 turn.
+Heavy Gun: Increases an opponents skill costs by 1 any for 1 turn.
+After this skill has been used 2 times, this skill changes to
+"Hero's Emblem".
+
+no cost
+
+S-A
+Code: Slash
+Deals 15 physical damage and gives 1 houkai energy stack.
+
+S-B
+Code: Cyclone
+Requires 4 houkai energy stacks.
+
+Deals damage + affliction for 2 turns.
+
+D-A
+Code: Chain
+Deals physical damage and gives 1 houkai energy stack.
+
+D-B
+Code: Meteor
+
+Requires 2 houkai energy stacks.
+
+G-A
+Code: Fusion
+
+Deals energy damage and gives 1 houkai energy stack.
+
+G-B
+Code: Conduit
+Requires at least 1 houkai energy stack to use.
+Uses up all available houkai energy stacks and deals 15 damage per stack + stun.
+
+Ultimate: Hero's Emblem
+
+Deals 40 energy damage to one enemy + restores 30 HP.
+
+Invul
+Sword Spin
+
+
+Lulu
+
+Cozy Time
+heals all allies by 15, for one turn damage on Lulu will heal the same amount instead
+2cd
+Lulu Cooking
+one enemy 15 affliction damage + -10 damage debuff 2 turns
+Looking for Fwens
+Target an opponent to be Lulu's fwen for 1 turn. If that opponent uses a new harmful skill on the next turn OR the next opponent who targets Lulu with a skill will get countered and become Lulu's friend for 2 turns.
+The opponent will be unable to use harmful skills on Lulu, they will deal 15 less damage and their 4th skill becomes
+"Spending Time with Lulu".
+During this time, Lulu will heal for 20 HP per turn 
+After the 2 turns end, Lulu will take 30 affliction damage and the opponent or ally won't be able to
+be affected by "Looking for Fwens" for the rest of the game.
+After Looking for fwens has ended 2 times, this skill becomes "The End".
+Hiding Under Blankie
+invul
+
+Spending Time with Lulu
+This character plays video games or watches anime with Lulu.
+This character will heal 25 HP and 
+
+The End
+Lulu health get set to 0. All allies and opponents will take 20 affliction damage.
+Characters previously affected by "Looking for Fwens" will take an additional 40 affliction damage.
