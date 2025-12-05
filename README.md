@@ -44,13 +44,14 @@ It only needs some minor usability updates aswell as some minor additional featu
 
 
 There is a txt file uploaded here called "Project To-Do List", that contains all ideas and unfinished stuff I had noted down for this project in more detail.
-Also there is also a folder that contains all supplementary images I had intended for future use in the game or reference.
+Also here is a folder that contains all supplementary images I had intended for future use in the game or as reference:
+https://drive.google.com/file/d/1H7lCMU18jVjnp0CeglGPk9pGEYSYzBEU/view?usp=sharing
 
-Lastly, for basic gameplay and stuff, here is a 2 year old version of this idea where it was still an idea for only a genshin fangame: 
+For basic gameplay and stuff, here is a 2 year old version of this idea where it was still an idea for only a genshin fangame: 
 https://docs.google.com/document/d/1e1xRI3GWDYaZmuWyJR_fAuCEmcOIfEpwDyodAyXTs_0/edit?tab=t.0
 Some things in the current project differ from this (like no elemental reactions in hoyo arena ect), but the turn-based gameplay is pretty much the same. It is described in alot of detail there.
 
-Lastly, there is also a txt that contains many of the character kit ideas.
+Lastly, there is also a Character List.txt that contains some of the planned character kit ideas.
 
 
 Since I am unfortunaely unable to finish this passion project, I leave this project here open for anyone who may want to build upon it and wants to make it a reality.
